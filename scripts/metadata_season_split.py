@@ -1,6 +1,6 @@
 import pandas as pd
 
-meta = pd.read_parquet('../../data/metadata.parquet')
+meta = pd.read_parquet('../data/metadata.parquet')
 
 def patch_to_season(patch_id):
     """
@@ -35,4 +35,4 @@ fall = meta[meta['season'] == 'fall']
 
 #create metadata-csv for each new df
 for season, df in zip(['winter', 'spring', 'summer', 'fall'], [winter, spring, summer, fall]):
-    df.to_csv(f'../patchlists/patches_{season}.csv', index=False)
+    df.to_parquet(f'patchlists/patches_{season}.parquet', index=False)
