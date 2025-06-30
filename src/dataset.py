@@ -46,9 +46,8 @@ class BigEarthNetDataset(Dataset):
             band_path = os.path.join(patch_dir, f'{patch_id}_{band}.tif')
             with rasterio.open(band_path) as src:
                 arr = src.read(1)
-            if arr.shape != (120, 120):
-                #resizing with bilinear interpolation
-                arr = resize(arr, (120, 120), order=1, preserve_range=True, anti_aliasing=True).astype(arr.dtype)
+            #resizing with bilinear interpolation
+            arr = resize(arr, (128, 128), order=1, preserve_range=True, anti_aliasing=True).astype(arr.dtype)
             channels.append(arr)
         image = np.stack(channels, axis=0)
 
